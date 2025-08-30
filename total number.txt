@@ -1,0 +1,25 @@
+class Solution(object):
+    def maximumImportance(self, n, roads):
+    
+        def freq(road, n):
+            fl = [e for sl in road for e in sl]
+            d = {}
+            for _ in range(n):
+                q = fl.count(_)
+                d['_'] = q
+            return d 
+
+        def dict_sort(d):
+            sd = dict(sorted(d.items(), key=lambda item: item[1]), reverse=True)
+            return sd 
+
+        x = 0
+        d = freq(roads, n)       
+        sd = dict_sort(d)
+
+        for w in range(n,0,-1):
+            for y in sd:
+                x = x + sd[y] * w
+
+        return x
+        
